@@ -8,7 +8,7 @@
 # Contributors:
 #   Red Hat, Inc. - initial API and implementation
 
-FROM python:3.8.6-slim
+FROM israelber/chime-python:latest
 
 ENV HOME=/home/theia
 
