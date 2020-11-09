@@ -8,27 +8,8 @@
 # Contributors:
 #   Red Hat, Inc. - initial API and implementation
 
-FROM israelber/chime-python:latest
 
-ENV HOME=/home/theia
+FROM quay.io/eclipse/che-sidecar-python:3.8.6-5913fc2
 
-RUN mkdir /projects ${HOME} && \
-    # Change permissions to let any arbitrary user
-    for f in "${HOME}" "/etc/passwd" "/projects"; do \
-      echo "Changing permissions on ${f}" && chgrp -R 0 ${f} && \
-      chmod -R g+rwX ${f}; \
-    done
-
-RUN apt-get update && \
-    apt-get install exuberant-ctags && \
-    apt-get install wget -y && \
-    wget -O - https://deb.nodesource.com/setup_12.x | bash - && \
-    apt-get update && \
-    apt-get install nodejs gcc build-essential -y && \
-    pip install pylint python-language-server[all] ptvsd jedi && \
-    apt-get purge -y --auto-remove gcc build-essential && \
-    apt-get clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
-
-ADD etc/entrypoint.sh /entrypoint.sh
-ENTRYPOINT [ "/entrypoint.sh" ]
-CMD ${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}
+COPY chime-1.0.0-py3-none-any.whl chime-1.0.0-py3-none-any.whl
+RUN pip install PyYAML chime-1.0.0-py3-none-any.whl
