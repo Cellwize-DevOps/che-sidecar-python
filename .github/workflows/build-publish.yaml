@@ -15,7 +15,7 @@ on:
 jobs:
   build:
     env:
-      IMAGE_NAME: quay.io/eclipse/che-sidecar-python
+      IMAGE_NAME: cellwizeltd/chime-sidecar-python
     runs-on: ubuntu-latest
     steps:
       - name: Clone source code
