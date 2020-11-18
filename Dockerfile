@@ -12,4 +12,5 @@
 FROM quay.io/eclipse/che-sidecar-python:3.8.6-5913fc2
 
 COPY chime-1.0.0-py3-none-any.whl chime-1.0.0-py3-none-any.whl
-RUN pip install PyYAML chime-1.0.0-py3-none-any.whl
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt chime-1.0.0-py3-none-any.whl
